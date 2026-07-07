@@ -1,16 +1,22 @@
-import simpleGit from "simple-git";
+import simpleGit, { type SimpleGit } from "simple-git";
 import type { GitRepository, GitStatus } from "../types/git";
 
 export class GitService {
-  private git = simpleGit();
+  private readonly git: SimpleGit;
+
+  constructor() {
+    this.git = simpleGit();
+  }
 
   async isRepository(): Promise<boolean> {
     return this.git.checkIsRepo();
   }
 
   async getRepository(): Promise<GitRepository> {
-    const branch = await this.git.branch();
-    const remotes = await this.git.getRemotes(true);
+    const [branch, remotes] = await Promise.all([
+      this.git.branch(),
+      this.git.getRemotes(true),
+    ]);
 
     return {
       branch: branch.current,
@@ -22,38 +28,37 @@ export class GitService {
     const status = await this.git.status();
 
     return {
-      isRepo: await this.isRepository(),
+      isRepo: true,
       hasChanges: !status.isClean(),
       currentBranch: status.current,
     };
   }
+
   async hasChanges(): Promise<boolean> {
-    const status = await this.git.status();
-    return !status.isClean();
+    return (await this.getStatus()).hasChanges;
   }
 
   async getCurrentBranch(): Promise<string> {
-    const branch = await this.git.branch();
-    return branch.current;
+    return (await this.getStatus()).currentBranch;
   }
 
-  async stageAll() {
+  async stageAll(): Promise<void> {
     await this.git.add(".");
   }
 
-  async commit(message: string) {
+  async commit(message: string): Promise<void> {
     await this.git.commit(message);
   }
 
-  async createTag(tag: string) {
+  async createTag(tag: string): Promise<void> {
     await this.git.addTag(tag);
   }
 
-  async pushBranch(remote = "origin") {
+  async pushBranch(remote = "origin"): Promise<void> {
     await this.git.push(remote);
   }
 
-  async pushTag(tag: string, remote = "origin") {
+  async pushTag(tag: string, remote = "origin"): Promise<void> {
     await this.git.pushTags(remote, tag);
   }
 }

@@ -1,19 +1,21 @@
 import pc from "picocolors";
 
-export const log = {
-  info(message: string) {
+class Logger {
+  info(message: string): void {
     console.log(pc.cyan("ℹ"), message);
-  },
+  }
 
-  success(message: string) {
+  success(message: string): void {
     console.log(pc.green("✔"), message);
-  },
+  }
 
-  error(message: string) {
-    console.log(pc.red("✖"), message);
-  },
-
-  warn(message: string) {
+  warn(message: string): void {
     console.log(pc.yellow("⚠"), message);
-  },
-};
+  }
+
+  error(message: string): void {
+    console.log(pc.red("✖"), message);
+  }
+}
+
+export const log = new Logger();

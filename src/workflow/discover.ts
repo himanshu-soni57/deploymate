@@ -12,15 +12,19 @@ export async function discoverWorkflows(): Promise<Workflow[]> {
   const workflows: Workflow[] = [];
 
   for (const file of files) {
+    const filename = path.basename(file);
+
     const parsed = await parseWorkflow(file);
 
-    workflows.push({
+    const workflow: Workflow = {
       name: parsed.name,
-      filename: path.basename(file),
+      filename,
       path: file,
       on: parsed.on,
       raw: parsed.raw,
-    });
+    };
+
+    workflows.push(workflow);
   }
 
   return workflows;
