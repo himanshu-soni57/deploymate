@@ -1,8 +1,10 @@
 import { GitService } from "../git/service";
 import { askCommitMessage } from "../prompts/commit";
+import { TagExecutor } from "../executors/tag";
 import { selectWorkflow } from "../prompts/workflow";
 import { log } from "../utils/logger";
 import { discoverWorkflows } from "../workflow/discover";
+import { ManualExecutor } from "../executors/manual";
 import { getDeploymentPlan } from "../workflow/planner";
 
 export class DeploymentService {
@@ -43,11 +45,11 @@ export class DeploymentService {
 
     switch (plan.strategy) {
       case "manual":
-        await this.manualDeployment();
+        await new ManualExecutor(this.git).execute();
         break;
 
       case "tag":
-        log.warn("Tag deployment not implemented yet.");
+        await new TagExecutor(this.git).execute(plan.tagPattern!);
         break;
 
       case "branch":
@@ -57,29 +59,5 @@ export class DeploymentService {
       default:
         log.error("Unknown deployment strategy.");
     }
-  }
-
-  private static async manualDeployment() {
-    console.log();
-
-    if (!(await this.git.hasChanges())) {
-      log.warn("Nothing to commit.");
-      return;
-    }
-
-    const message = await askCommitMessage();
-
-    log.info("Staging files...");
-    await this.git.stageAll();
-
-    log.info("Creating commit...");
-    await this.git.commit(message);
-
-    log.info("Pushing branch...");
-    await this.git.pushBranch();
-
-    console.log();
-
-    log.success("Deployment started successfully.");
   }
 }
