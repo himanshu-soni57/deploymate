@@ -1,0 +1,43 @@
+{
+  "name": "deploymate",
+  "version": "0.1.0",
+  "description": "A CLI to deploy GitHub Actions projects with ease.",
+  "type": "module",
+  "private": false,
+  "bin": {
+    "deploymate": "./dist/index.js",
+    "dpm": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "tsup",
+    "watch": "tsup --watch"
+  },
+  "keywords": [
+    "cli",
+    "github-actions",
+    "deployment",
+    "git",
+    "automation"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^26.1.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0",
+    "commander": "^15.0.0",
+    "execa": "^9.6.1",
+    "fast-glob": "^3.3.3",
+    "open": "^11.0.0",
+    "picocolors": "^1.1.1",
+    "simple-git": "^3.36.0",
+    "yaml": "^2.9.0"
+  }
+}
