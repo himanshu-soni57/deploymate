@@ -1,3 +1,4 @@
+import { BranchExecutor } from "../executors/branch";
 import { GitService } from "../git/service";
 import { askCommitMessage } from "../prompts/commit";
 import { TagExecutor } from "../executors/tag";
@@ -53,7 +54,7 @@ export class DeploymentService {
         break;
 
       case "branch":
-        log.warn("Branch deployment not implemented yet.");
+        await new BranchExecutor(this.git).execute(plan.branch!);
         break;
 
       default:

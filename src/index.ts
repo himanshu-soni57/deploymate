@@ -2,6 +2,7 @@
 
 import { Command } from "commander";
 import { deploy } from "./commands/deploy";
+import { handleError } from "./utils/error";
 
 const program = new Command();
 
@@ -15,4 +16,12 @@ program
   .description("Deploy current repository")
   .action(deploy);
 
-program.parse();
+async function bootstrap() {
+  try {
+    await program.parseAsync();
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+await bootstrap();

@@ -1,21 +1,26 @@
 import { GitService } from "../git/service";
 import { askCommitMessage } from "../prompts/commit";
-import { confirmDeployment } from "../prompts/confirm";
-import { log } from "../utils/logger";
 import { createSpinner } from "../utils/spinner";
+import { log } from "../utils/logger";
 
-export class ManualExecutor {
+export class BranchExecutor {
   constructor(private readonly git: GitService) {}
 
-  async execute(): Promise<void> {
+  async execute(branch: string): Promise<void> {
     if (!(await this.git.hasChanges())) {
       log.warn("Nothing to commit.");
       return;
     }
 
-    const message = await askCommitMessage();
+    const currentBranch = await this.git.getCurrentBranch();
 
-    await confirmDeployment();
+    if (currentBranch !== branch) {
+      throw new Error(
+        `Current branch is '${currentBranch}', but workflow expects '${branch}'.`,
+      );
+    }
+
+    const message = await askCommitMessage();
 
     const spinner = createSpinner();
 

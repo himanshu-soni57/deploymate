@@ -42,6 +42,11 @@ export class GitService {
     return (await this.getStatus()).currentBranch;
   }
 
+  async tagExists(tag: string): Promise<boolean> {
+    const tags = await this.git.tags();
+    return tags.all.includes(tag);
+  }
+
   async stageAll(): Promise<void> {
     await this.git.add(".");
   }

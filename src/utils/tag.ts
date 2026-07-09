@@ -9,7 +9,8 @@ export function generateTag(pattern: string): string {
   const min = String(now.getMinutes()).padStart(2, "0");
   const ss = String(now.getSeconds()).padStart(2, "0");
 
-  const prefix = pattern.replace("*", "");
+  const star = pattern.indexOf("*");
+  const prefix = star === -1 ? pattern : pattern.slice(0, star);
 
   return `${prefix}${yyyy}${mm}${dd}-${hh}${min}${ss}`;
 }

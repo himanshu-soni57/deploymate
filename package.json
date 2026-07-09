@@ -1,5 +1,17 @@
 {
   "name": "deploymate",
+  "author": "Himanshu Soni",
+  "engines": {
+    "node": ">=20"
+  },
+  "homepage": "https://github.com/himanshu-soni57/deploymate",
+  "bugs": {
+  "url": "https://github.com/himanshu-soni57/deploymate/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url":"https://github.com/himanshu-soni57/deploymate.git"
+  },
   "version": "0.1.0",
   "description": "A CLI to deploy GitHub Actions projects with ease.",
   "type": "module",
