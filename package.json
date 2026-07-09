@@ -1,5 +1,5 @@
 {
-  "name": "deploymate",
+  "name": "deploypilot",
   "author": "Himanshu Soni",
   "engines": {
     "node": ">=20"
@@ -17,9 +17,9 @@
   "type": "module",
   "private": false,
   "bin": {
-    "deploymate": "./dist/index.js",
-    "dpm": "./dist/index.js"
-  },
+  "deploypilot": "dist/index.js",
+  "dpp": "dist/index.js"
+},
   "files": [
     "dist"
   ],

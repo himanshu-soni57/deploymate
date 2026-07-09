@@ -1,15 +1,15 @@
-# 🚀 DeployMate
+# 🚀 DeployPilot
 
-![npm](https://img.shields.io/npm/v/deploymate)
-![License](https://img.shields.io/npm/l/deploymate)
+![npm](https://img.shields.io/npm/v/DeployPilot)
+![License](https://img.shields.io/npm/l/DeployPilot)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-green)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 
 > Deploy GitHub Actions workflows with a single command.
 
-DeployMate is a lightweight CLI that automates Git-based deployments for projects using GitHub Actions.
+DeployPilot is a lightweight CLI that automates Git-based deployments for projects using GitHub Actions.
 
-Instead of manually staging files, committing, creating tags, and pushing changes, DeployMate detects your deployment workflow and performs the required Git operations automatically.
+Instead of manually staging files, committing, creating tags, and pushing changes, DeployPilot detects your deployment workflow and performs the required Git operations automatically.
 
 ---
 
@@ -39,7 +39,7 @@ on:
       - main
 ```
 
-DeployMate will:
+DeployPilot will:
 
 - Stage files
 - Commit changes
@@ -56,7 +56,7 @@ on:
       - "prod-v*"
 ```
 
-DeployMate will:
+DeployPilot will:
 
 - Stage files
 - Commit changes
@@ -64,7 +64,7 @@ DeployMate will:
 - Push branch
 - Push tag
 
-If there are no uncommitted changes, DeployMate can create and push a deployment tag from the latest commit.
+If there are no uncommitted changes, DeployPilot can create and push a deployment tag from the latest commit.
 
 ---
 
