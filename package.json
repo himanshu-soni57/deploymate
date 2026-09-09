@@ -1,41 +1,57 @@
 {
   "name": "deploypilot",
+  "version": "0.2.0",
+  "description": "Trigger, monitor, and audit GitHub Actions deployments from your terminal.",
   "author": "Himanshu Soni",
+  "license": "MIT",
+  "type": "module",
   "engines": {
     "node": ">=20"
   },
-  "homepage": "https://github.com/himanshu-soni57/deploymate",
+  "homepage": "https://github.com/himanshu-soni57/deploymate#readme",
   "bugs": {
-  "url": "https://github.com/himanshu-soni57/deploymate/issues"
+    "url": "https://github.com/himanshu-soni57/deploymate/issues"
   },
   "repository": {
     "type": "git",
-    "url":"https://github.com/himanshu-soni57/deploymate.git"
+    "url": "git+https://github.com/himanshu-soni57/deploymate.git"
   },
-  "version": "0.1.0",
-  "description": "A CLI to deploy GitHub Actions projects with ease.",
-  "type": "module",
-  "private": false,
   "bin": {
-  "deploypilot": "dist/index.js",
-  "dpp": "dist/index.js"
-},
+    "deploypilot": "dist/index.js",
+    "dpp": "dist/index.js"
+  },
+  "main": "dist/config.js",
+  "types": "dist/config.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "bun run src/index.ts",
     "build": "tsup",
-    "watch": "tsup --watch"
+    "watch": "tsup --watch",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bun run typecheck && bun test && bun run build"
   },
   "keywords": [
     "cli",
     "github-actions",
     "deployment",
+    "deploy",
     "git",
+    "tags",
+    "semver",
+    "workflow-dispatch",
+    "ci-cd",
     "automation"
   ],
-  "license": "MIT",
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^26.1.0",
@@ -45,9 +61,6 @@
   "dependencies": {
     "@clack/prompts": "^1.7.0",
     "commander": "^15.0.0",
-    "execa": "^9.6.1",
-    "fast-glob": "^3.3.3",
-    "open": "^11.0.0",
     "picocolors": "^1.1.1",
     "simple-git": "^3.36.0",
     "yaml": "^2.9.0"

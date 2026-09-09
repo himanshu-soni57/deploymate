@@ -1,0 +1,1507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0B0B0E">
+<meta name="description" content="Searchable reference for every DeployPilot command, flag, doctor rule and config key. DeployPilot triggers, monitors and audits GitHub Actions deployments from your terminal.">
+<link rel="canonical" href="https://himanshu-soni57.github.io/deploymate/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B0B0E'/%3E%3Ctext x='16' y='23' font-family='ui-monospace,monospace' font-size='19' font-weight='600' fill='%23F0B429' text-anchor='middle'%3E%26gt;%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DeployPilot">
+<meta property="og:title" content="DeployPilot Command Deck">
+<meta property="og:description" content="Searchable reference for every DeployPilot command, flag, doctor rule and config key. DeployPilot triggers, monitors and audits GitHub Actions deployments from your terminal.">
+<meta property="og:url" content="https://himanshu-soni57.github.io/deploymate/">
+<meta name="twitter:card" content="summary">
+<title>DeployPilot Command Deck</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600&display=swap">
+
+<style>
+  :root {
+    --ground: #0B0B0E;
+    --surface: #121216;
+    --raised: #191920;
+    --sunk: #0E0E12;
+    --line: #26262F;
+    --line-soft: #1D1D25;
+
+    --ink: #E9E7E4;
+    --dim: #9B978F;
+    --faint: #6E6A64;
+
+    --accent: #F0B429;
+    --accent-ink: #1A1405;
+    --accent-soft: rgba(240, 180, 41, 0.11);
+    --accent-line: rgba(240, 180, 41, 0.28);
+
+    --ok: #4FC08D;
+    --warn: #E08C4A;
+    --danger: #EF5F6B;
+
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 22px;
+    --r-pill: 999px;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --display: "Bricolage Grotesque", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--r-sm);
+  }
+
+  code, kbd, pre { font-family: var(--mono); }
+
+  /* ---------------------------------------------------------------- header */
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(11, 11, 14, 0.86);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .topbar-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .mark:hover { text-decoration: none; }
+
+  .mark-glyph {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--r-md);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    display: grid;
+    place-items: center;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .version {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    border-radius: var(--r-pill);
+    padding: 2px 10px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .search-wrap {
+    flex: 1 1 300px;
+    position: relative;
+    min-width: 240px;
+  }
+
+  .search {
+    width: 100%;
+    background: var(--sunk);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    padding: 10px 82px 10px 14px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .search::placeholder { color: var(--faint); }
+
+  .search:focus {
+    outline: none;
+    border-color: var(--accent-line);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  .search-hint {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+  }
+
+  kbd.key {
+    font-size: 11px;
+    color: var(--dim);
+    background: var(--raised);
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: var(--r-sm);
+    padding: 1px 6px;
+    line-height: 1.5;
+  }
+
+  .count {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* ------------------------------------------------------------------ hero */
+
+  .hero {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 46px 24px 30px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(30px, 4.4vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -0.032em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+
+  .lede {
+    color: var(--dim);
+    font-size: 16.5px;
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  .lede strong { color: var(--ink); font-weight: 500; }
+
+  .install {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 18px 20px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .install-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  /* -------------------------------------------------------------- copyable */
+
+  .cmd {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--ink);
+    background: var(--sunk);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 9px 40px 9px 13px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .cmd::after {
+    content: "copy";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    background: var(--surface);
+    border-radius: var(--r-sm);
+    padding: 2px 6px;
+  }
+
+  .cmd:hover { border-color: var(--accent-line); background: #0C0C10; }
+  .cmd:hover::after { color: var(--accent); }
+  .cmd.copied::after { content: "copied"; color: var(--ok); }
+
+  .cmd .flagpart { color: var(--accent); }
+  .cmd .argpart { color: var(--dim); }
+
+  /* --------------------------------------------------------------- shell */
+
+  .shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 90px;
+    display: grid;
+    grid-template-columns: 176px minmax(0, 1fr);
+    gap: 44px;
+    align-items: start;
+  }
+
+  .rail {
+    position: sticky;
+    top: 78px;
+    display: grid;
+    gap: 2px;
+    padding: 6px;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+  }
+
+  .rail a {
+    display: block;
+    color: var(--dim);
+    font-size: 13px;
+    padding: 6px 11px;
+    border-radius: var(--r-sm);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .rail a:hover {
+    background: var(--raised);
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .rail a.on { color: var(--accent); background: var(--accent-soft); }
+
+  .content { display: grid; gap: 54px; min-width: 0; }
+
+  /* -------------------------------------------------------------- sections */
+
+  section { scroll-margin-top: 86px; }
+
+  .sec-head { margin-bottom: 18px; }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 23px;
+    letter-spacing: -0.022em;
+    margin: 0 0 6px;
+  }
+
+  .sec-note {
+    color: var(--dim);
+    font-size: 14.5px;
+    margin: 0;
+    max-width: 68ch;
+  }
+
+  /* ----------------------------------------------------------------- table */
+
+  .tablewrap {
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .tablescroll { overflow-x: auto; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    font-weight: 500;
+    padding: 11px 16px;
+    background: var(--sunk);
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+    color: var(--dim);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: var(--raised); }
+
+  td.goal { color: var(--ink); font-weight: 450; min-width: 220px; }
+  td.mono { font-family: var(--mono); font-size: 13px; color: var(--ink); white-space: nowrap; }
+  td.num { font-variant-numeric: tabular-nums; }
+
+  .inline {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: var(--r-sm);
+    padding: 1px 6px;
+    white-space: nowrap;
+  }
+
+  .inline.plain { color: var(--dim); background: var(--raised); }
+
+  /* ----------------------------------------------------------- command card */
+
+  .cards { display: grid; gap: 14px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .card-name {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .card-name .sub { color: var(--faint); font-weight: 400; }
+
+  .card-what { color: var(--dim); font-size: 14px; flex: 1 1 240px; min-width: 0; }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--r-pill);
+    padding: 2px 9px;
+    border: 1px solid var(--line);
+    color: var(--faint);
+    white-space: nowrap;
+  }
+
+  .tag.api { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+  .tag.local { color: var(--ok); border-color: rgba(79, 192, 141, 0.3); background: rgba(79, 192, 141, 0.09); }
+  .tag.writes { color: var(--warn); border-color: rgba(224, 140, 74, 0.3); background: rgba(224, 140, 74, 0.09); }
+
+  .card-body { padding: 15px 18px; display: grid; gap: 14px; }
+
+  .flags { display: grid; gap: 1px; background: var(--line-soft); border-radius: var(--r-md); overflow: hidden; }
+
+  .flag {
+    display: grid;
+    grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+    gap: 16px;
+    background: var(--surface);
+    padding: 8px 13px;
+  }
+
+  .flag:hover { background: var(--raised); }
+
+  .flag dt {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--accent);
+    margin: 0;
+    word-break: break-word;
+  }
+
+  .flag dd { margin: 0; color: var(--dim); font-size: 13.5px; }
+
+  .flag dd .choices {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  /* --------------------------------------------------------------- severity */
+
+  .sev {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--r-pill);
+    padding: 2px 9px;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .sev.error { color: var(--danger); background: rgba(239, 95, 107, 0.11); border: 1px solid rgba(239, 95, 107, 0.28); }
+  .sev.warn { color: var(--warn); background: rgba(224, 140, 74, 0.1); border: 1px solid rgba(224, 140, 74, 0.28); }
+  .sev.note { color: var(--dim); background: var(--raised); border: 1px solid var(--line); }
+
+  /* ------------------------------------------------------------- callout */
+
+  .callout {
+    border: 1px solid var(--accent-line);
+    background: var(--accent-soft);
+    border-radius: var(--r-lg);
+    padding: 15px 18px;
+    color: var(--ink);
+    font-size: 14px;
+  }
+
+  .callout strong { color: var(--accent); font-weight: 600; }
+
+  /* ------------------------------------------------------------------ misc */
+
+  .empty {
+    display: none;
+    border: 1px dashed var(--line);
+    border-radius: var(--r-lg);
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--dim);
+  }
+
+  .empty.on { display: block; }
+  .empty code { color: var(--accent); }
+
+  .hidden { display: none !important; }
+
+  footer {
+    border-top: 1px solid var(--line-soft);
+    padding: 26px 24px 46px;
+  }
+
+  .footer-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    color: var(--faint);
+    font-size: 13px;
+  }
+
+  @media (max-width: 940px) {
+    .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 34px; }
+    .shell { grid-template-columns: 1fr; gap: 26px; }
+    .rail {
+      position: static;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .flag { grid-template-columns: 1fr; gap: 3px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="mark" href="#top">
+      <span class="mark-glyph" aria-hidden="true">&gt;</span>
+      DeployPilot
+    </a>
+    <span class="version">v0.2.0</span>
+    <div class="search-wrap">
+      <input
+        id="filter"
+        class="search"
+        type="search"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Filter commands, flags, rules, recipes&hellip;"
+        aria-label="Filter the reference">
+      <span class="search-hint" aria-hidden="true"><kbd class="key">/</kbd></span>
+    </div>
+    <span class="count" id="count">78 entries</span>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div>
+    <p class="eyebrow">Command reference</p>
+    <h1>Every DeployPilot command, and what it is for.</h1>
+    <p class="lede">
+      DeployPilot reads your <code class="inline plain">.github/workflows</code>, works out how each one can
+      actually be triggered, does the Git or API work to start it, then watches the run and tells you whether
+      it worked. <strong>Start with the recipes</strong> if you know the outcome you want but not the flag.
+    </p>
+  </div>
+  <div class="install">
+    <span class="install-label">Install</span>
+    <button class="cmd" type="button">npm install -g deploypilot</button>
+    <span class="install-label">Then, in any repo</span>
+    <button class="cmd" type="button">dpp deploy</button>
+    <p style="margin:0;color:var(--faint);font-size:13px;">
+      Two binaries are installed: <code class="inline plain">deploypilot</code> and the short alias
+      <code class="inline plain">dpp</code>. Both are used interchangeably below.
+    </p>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a href="#recipes">Recipes</a>
+    <a href="#commands">Commands</a>
+    <a href="#global">Global flags</a>
+    <a href="#staging">Staging modes</a>
+    <a href="#tags">Tag patterns</a>
+    <a href="#rules">Doctor rules</a>
+    <a href="#templates">Templates</a>
+    <a href="#config">Config</a>
+    <a href="#auth">Auth &amp; exits</a>
+  </nav>
+
+  <main class="content">
+
+    <!-- ============================================================ RECIPES -->
+    <section id="recipes">
+      <div class="sec-head">
+        <h2>I want to&hellip;</h2>
+        <p class="sec-note">The outcome you want, and the exact command that gets it. Click any command to copy it.</p>
+      </div>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead>
+              <tr><th scope="col">Goal</th><th scope="col">Command</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody id="recipe-rows">
+              <tr data-search="deploy interactive pick workflow start">
+                <td class="goal">Just deploy, and be asked about the rest</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy</button></td>
+                <td>Picks the workflow, the strategy, what to commit, and the tag.</td>
+              </tr>
+              <tr data-search="commit everything all changes deploy">
+                <td class="goal">Commit every change and deploy</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --all -m "fix: refund rounding"</button></td>
+                <td>Credential-shaped files still ask for confirmation first.</td>
+              </tr>
+              <tr data-search="selective files only some partial commit pick choose">
+                <td class="goal">Commit only some files, leave the rest alone</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy -f src/payments.ts -f src/refunds.ts -m "fix: rounding"</button></td>
+                <td>Repeatable, globs allowed. Unselected files stay uncommitted.</td>
+              </tr>
+              <tr data-search="already staged index git add use staged">
+                <td class="goal">Deploy exactly what I already staged</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --staged -m "fix: rounding"</button></td>
+                <td>Uses the index as-is; everything else is left behind.</td>
+              </tr>
+              <tr data-search="already committed pushed tag existing commits no commit">
+                <td class="goal">Tag code that is already committed and pushed</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --no-commit</button></td>
+                <td>Commits nothing. Tags HEAD and pushes only the tag.</td>
+              </tr>
+              <tr data-search="old commit sha specific ref tag past">
+                <td class="goal">Tag an older commit, not HEAD</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --no-commit --ref a1b2c3d</button></td>
+                <td>Omit <code class="inline plain">--ref</code> to pick from the last 15 commits.</td>
+              </tr>
+              <tr data-search="dry run preview safe nothing happens test">
+                <td class="goal">See exactly what would happen, change nothing</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --dry-run</button></td>
+                <td>Prints every git command and API call; performs none.</td>
+              </tr>
+              <tr data-search="semver bump minor major patch version">
+                <td class="goal">Cut a minor release</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --bump minor</button></td>
+                <td>Reads the newest tag matching the workflow's own pattern.</td>
+              </tr>
+              <tr data-search="conventional commits automatic bump infer auto">
+                <td class="goal">Let commit history choose the version</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --bump auto</button></td>
+                <td>BREAKING &rarr; major, <code class="inline plain">feat</code> &rarr; minor, else patch.</td>
+              </tr>
+              <tr data-search="watch follow run outcome monitor live">
+                <td class="goal">Deploy and wait to find out if it worked</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --watch</button></td>
+                <td>Exits non-zero if the run fails, and prints the failing step.</td>
+              </tr>
+              <tr data-search="manual dispatch workflow_dispatch trigger inputs">
+                <td class="goal">Trigger a manual (<code class="inline plain">workflow_dispatch</code>) workflow</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --strategy dispatch -i environment=staging</button></td>
+                <td>Inputs are prompted from the workflow's own schema if omitted.</td>
+              </tr>
+              <tr data-search="release github release publish notes changelog">
+                <td class="goal">Tag and publish a GitHub Release together</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --release</button></td>
+                <td>Release body is the generated changelog.</td>
+              </tr>
+              <tr data-search="nothing to push already up to date retrigger empty commit">
+                <td class="goal">Re-trigger a branch workflow when nothing is left to push</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy --empty-commit</button></td>
+                <td>A branch push is a no-op if the remote already has every commit.</td>
+              </tr>
+              <tr data-search="environment profile config production staging named">
+                <td class="goal">Deploy a named environment with no prompts</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy production --yes</button></td>
+                <td>Requires an environment in your config. See <a href="#config">Config</a>.</td>
+              </tr>
+              <tr data-search="failing run why failed logs error debug">
+                <td class="goal">Find out why the last run failed</td>
+                <td class="mono"><button class="cmd" type="button">dpp logs</button></td>
+                <td>Prints the failing step's log tail, not the whole dump.</td>
+              </tr>
+              <tr data-search="retry rerun failed jobs only">
+                <td class="goal">Re-run only the jobs that failed</td>
+                <td class="mono"><button class="cmd" type="button">dpp rerun --failed --watch</button></td>
+                <td>Leaves the jobs that already passed alone.</td>
+              </tr>
+              <tr data-search="rollback revert previous deployment undo bad deploy">
+                <td class="goal">Roll back to the last deployment that worked</td>
+                <td class="mono"><button class="cmd" type="button">dpp rollback --watch</button></td>
+                <td>Requires typing <code class="inline plain">rollback</code> to confirm.</td>
+              </tr>
+              <tr data-search="what is deployed where environments status current">
+                <td class="goal">See what is deployed where right now</td>
+                <td class="mono"><button class="cmd" type="button">dpp status</button></td>
+                <td>In-flight runs, environment state, recent history.</td>
+              </tr>
+              <tr data-search="why does workflow not run trigger conditions explain understand yaml">
+                <td class="goal">Understand when a workflow actually runs</td>
+                <td class="mono"><button class="cmd" type="button">dpp explain deploy-prod.yml</button></td>
+                <td>Plain English: triggers, job graph, approvals, permissions.</td>
+              </tr>
+              <tr data-search="audit security problems review workflows doctor check">
+                <td class="goal">Audit workflows before they bite</td>
+                <td class="mono"><button class="cmd" type="button">dpp doctor</button></td>
+                <td>12 rules. See <a href="#rules">Doctor rules</a>.</td>
+              </tr>
+              <tr data-search="missing secret not configured env vars check">
+                <td class="goal">Check every secret a workflow needs exists</td>
+                <td class="mono"><button class="cmd" type="button">dpp secrets</button></td>
+                <td>Names only; values are never read or printed.</td>
+              </tr>
+              <tr data-search="ci pipeline non-interactive automation script json">
+                <td class="goal">Run it from CI with no prompts</td>
+                <td class="mono"><button class="cmd" type="button">dpp deploy production --all -m "$MSG" --bump auto --watch --yes --json</button></td>
+                <td>CI is auto-detected; every prompt has a flag equivalent.</td>
+              </tr>
+              <tr data-search="new workflow scaffold template create start">
+                <td class="goal">Start a workflow from scratch</td>
+                <td class="mono"><button class="cmd" type="button">dpp new</button></td>
+                <td>Six templates with permissions and concurrency already set.</td>
+              </tr>
+              <tr data-search="tab completion shell zsh bash fish autocomplete">
+                <td class="goal">Get tab completion in zsh</td>
+                <td class="mono"><button class="cmd" type="button">dpp completion zsh &gt; "${fpath[1]}/_deploypilot"</button></td>
+                <td>Also supports <code class="inline plain">bash</code> and <code class="inline plain">fish</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================== COMMANDS -->
+    <section id="commands">
+      <div class="sec-head">
+        <h2>Commands</h2>
+        <p class="sec-note">
+          Sixteen commands. <span class="tag local">local</span> works with plain Git and no token;
+          <span class="tag api">api</span> needs GitHub API access; <span class="tag writes">writes</span>
+          changes your repository or your remote.
+        </p>
+      </div>
+      <div class="cards" id="command-cards">
+
+        <article class="card" data-search="deploy commit push dispatch tag branch release run start ship">
+          <div class="card-head">
+            <span class="card-name">dpp deploy <span class="sub">[environment]</span></span>
+            <span class="card-what">Commit, push or dispatch, and start a workflow run. The default command.</span>
+            <span class="tag writes">writes</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Discovers workflows, ranks the strategies each one supports, runs preflight checks, then commits
+              and pushes, creates and pushes a tag, dispatches, or publishes a release &mdash; whichever the
+              workflow actually listens for.
+            </p>
+            <dl class="flags">
+              <div class="flag" data-search="workflow file name choose which"><dt>-w, --workflow &lt;file&gt;</dt><dd>Workflow file or name. Skips the picker.</dd></div>
+              <div class="flag" data-search="strategy tag branch dispatch release force"><dt>-s, --strategy &lt;kind&gt;</dt><dd>How to trigger it. <span class="choices">tag · branch · dispatch · release</span></dd></div>
+              <div class="flag" data-search="message commit m"><dt>-m, --message &lt;message&gt;</dt><dd>Commit message. Required when committing non-interactively.</dd></div>
+              <div class="flag" data-search="all every change stage"><dt>-a, --all</dt><dd>Commit every change in the working tree.</dd></div>
+              <div class="flag" data-search="file selective only these paths glob partial"><dt>-f, --file &lt;path...&gt;</dt><dd>Commit only these files. Repeatable, globs allowed. Everything else stays uncommitted.</dd></div>
+              <div class="flag" data-search="staged index only"><dt>--staged</dt><dd>Commit exactly what is already in the index.</dd></div>
+              <div class="flag" data-search="no commit existing commits already pushed"><dt>--no-commit</dt><dd>Commit nothing; deploy the commits that already exist.</dd></div>
+              <div class="flag" data-search="tag exact name explicit"><dt>-t, --tag &lt;name&gt;</dt><dd>Use this exact tag. Rejected if the workflow's filter would ignore it.</dd></div>
+              <div class="flag" data-search="ref commit sha older head"><dt>-r, --ref &lt;ref&gt;</dt><dd>Tag or dispatch this commit instead of HEAD.</dd></div>
+              <div class="flag" data-search="bump version semver major minor patch prerelease auto"><dt>-b, --bump &lt;type&gt;</dt><dd>Version bump for tag strategies. <span class="choices">major · minor · patch · prerelease · auto</span></dd></div>
+              <div class="flag" data-search="sign gpg signed tag"><dt>--sign</dt><dd>Create a GPG-signed tag instead of a plain annotated one.</dd></div>
+              <div class="flag" data-search="release github release publish"><dt>--release</dt><dd>Also publish a GitHub Release, with the changelog as its body.</dd></div>
+              <div class="flag" data-search="input workflow dispatch key value"><dt>-i, --input &lt;key=value...&gt;</dt><dd><code class="inline plain">workflow_dispatch</code> inputs. Repeatable.</dd></div>
+              <div class="flag" data-search="no fetch offline skip preflight remote"><dt>--no-fetch</dt><dd>Skip fetching the remote during preflight. Use when offline.</dd></div>
+              <div class="flag" data-search="no push local only"><dt>--no-push</dt><dd>Do everything locally but push nothing.</dd></div>
+              <div class="flag" data-search="watch follow run monitor"><dt>--watch</dt><dd>Follow the run and report its outcome. Exits non-zero on failure.</dd></div>
+              <div class="flag" data-search="empty commit retrigger nothing to push"><dt>--empty-commit</dt><dd>Create an empty commit when there is nothing left to push.</dd></div>
+              <div class="flag" data-search="signoff signed-off-by trailer dco"><dt>--signoff</dt><dd>Add a <code class="inline plain">Signed-off-by</code> trailer to the commit.</dd></div>
+              <div class="flag" data-search="dry run preview safe"><dt>--dry-run</dt><dd>Show every action without performing any of them.</dd></div>
+              <div class="flag" data-search="yes skip confirmations non-interactive"><dt>-y, --yes</dt><dd>Accept defaults and skip confirmations.</dd></div>
+              <div class="flag" data-search="force override preflight failed checks"><dt>--force</dt><dd>Continue past failed preflight checks.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="watch follow run monitor live jobs steps failing">
+          <div class="card-head">
+            <span class="card-name">dpp watch <span class="sub">[run-id]</span></span>
+            <span class="card-what">Follow a workflow run and surface failing steps.</span>
+            <span class="tag api">api</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              With no run id, picks the latest active run on your branch. Detects runs blocked on an
+              environment reviewer and says so rather than appearing hung.
+            </p>
+            <dl class="flags">
+              <div class="flag" data-search="workflow restrict"><dt>-w, --workflow &lt;file&gt;</dt><dd>Restrict to this workflow.</dd></div>
+              <div class="flag" data-search="branch restrict"><dt>-b, --branch &lt;name&gt;</dt><dd>Restrict to this branch.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="status deployed where environments in flight current overview">
+          <div class="card-head">
+            <span class="card-name">dpp status</span>
+            <span class="card-what">Show in-flight runs, environment state, and recent history.</span>
+            <span class="tag api">api</span>
+          </div>
+          <div class="card-body">
+            <dl class="flags">
+              <div class="flag" data-search="limit count recent"><dt>-n, --limit &lt;count&gt;</dt><dd>How many recent runs to show.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="history past deployments list previous runs who when duration">
+          <div class="card-head">
+            <span class="card-name">dpp history</span>
+            <span class="card-what">List past deployments with who, when, duration, and outcome.</span>
+            <span class="tag api">api</span>
+          </div>
+          <div class="card-body">
+            <dl class="flags">
+              <div class="flag" data-search="limit count"><dt>-n, --limit &lt;count&gt;</dt><dd>How many runs to list.</dd></div>
+              <div class="flag" data-search="workflow restrict"><dt>-w, --workflow &lt;file&gt;</dt><dd>Restrict to this workflow.</dd></div>
+              <div class="flag" data-search="branch restrict"><dt>-b, --branch &lt;name&gt;</dt><dd>Restrict to this branch.</dd></div>
+              <div class="flag" data-search="event trigger push dispatch restrict"><dt>-e, --event &lt;event&gt;</dt><dd>Restrict to this trigger event.</dd></div>
+              <div class="flag" data-search="failed only unsuccessful"><dt>--failed</dt><dd>Only show runs that did not succeed.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="logs output error debug failing step tail why failed">
+          <div class="card-head">
+            <span class="card-name">dpp logs <span class="sub">[run-id]</span></span>
+            <span class="card-what">Print logs for a run, failing steps first.</span>
+            <span class="tag api">api</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Defaults to the most recent run, and to only the jobs that failed &mdash; the log tail around
+              the error, not megabytes of output.
+            </p>
+            <dl class="flags">
+              <div class="flag" data-search="job name single"><dt>-j, --job &lt;name&gt;</dt><dd>Only this job. Matched as a substring.</dd></div>
+              <div class="flag" data-search="full every job all output"><dt>--no-failed-only</dt><dd>Print every job's full log instead.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="cancel stop abort running run kill">
+          <div class="card-head">
+            <span class="card-name">dpp cancel <span class="sub">[run-id]</span></span>
+            <span class="card-what">Cancel a workflow run.</span>
+            <span class="tag api">api</span>
+          </div>
+          <div class="card-body">
+            <dl class="flags">
+              <div class="flag" data-search="yes skip confirmation"><dt>-y, --yes</dt><dd>Skip the confirmation prompt.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="rerun retry again failed jobs flaky">
+          <div class="card-head">
+            <span class="card-name">dpp rerun <span class="sub">[run-id]</span></span>
+            <span class="card-what">Re-run a workflow run.</span>
+            <span class="tag api">api</span>
+          </div>
+          <div class="card-body">
+            <dl class="flags">
+              <div class="flag" data-search="failed only jobs"><dt>--failed</dt><dd>Only re-run the jobs that failed.</dd></div>
+              <div class="flag" data-search="watch follow"><dt>--watch</dt><dd>Follow the new run.</dd></div>
+              <div class="flag" data-search="yes skip confirmation"><dt>-y, --yes</dt><dd>Skip the confirmation prompt.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="rollback revert previous successful redeploy undo">
+          <div class="card-head">
+            <span class="card-name">dpp rollback</span>
+            <span class="card-what">Re-deploy a previous successful run.</span>
+            <span class="tag api">api</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Prefers dispatching the workflow at that run's commit; falls back to GitHub's own re-run when
+              the workflow has no <code class="inline plain">workflow_dispatch</code> trigger. Requires typing
+              <code class="inline plain">rollback</code> to confirm, because it re-deploys old code.
+            </p>
+            <dl class="flags">
+              <div class="flag" data-search="workflow which"><dt>-w, --workflow &lt;file&gt;</dt><dd>Workflow to roll back.</dd></div>
+              <div class="flag" data-search="run id number target"><dt>--run &lt;id&gt;</dt><dd>Roll back to this run id or run number.</dd></div>
+              <div class="flag" data-search="input dispatch key value"><dt>-i, --input &lt;key=value...&gt;</dt><dd><code class="inline plain">workflow_dispatch</code> inputs.</dd></div>
+              <div class="flag" data-search="watch follow"><dt>--watch</dt><dd>Follow the rollback run.</dd></div>
+              <div class="flag" data-search="yes skip typed confirmation"><dt>-y, --yes</dt><dd>Skip the typed confirmation.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="doctor audit security lint rules problems review check">
+          <div class="card-head">
+            <span class="card-name">dpp doctor</span>
+            <span class="card-what">Audit workflows for security, correctness, and cost problems.</span>
+            <span class="tag local">local</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Runs the structural checks from <code class="inline plain">lint</code> plus 12 audit rules.
+              Secret checks are skipped when no GitHub token is available. Exits non-zero when any error is found.
+            </p>
+            <dl class="flags">
+              <div class="flag" data-search="only rule specific subset"><dt>--only &lt;rule...&gt;</dt><dd>Run only these rule ids.</dd></div>
+              <div class="flag" data-search="skip ignore rule exclude"><dt>--skip &lt;rule...&gt;</dt><dd>Skip these rule ids.</dd></div>
+              <div class="flag" data-search="strict warnings fail exit"><dt>--strict</dt><dd>Exit non-zero on warnings too, not just errors.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="lint validate yaml syntax errors line numbers schema">
+          <div class="card-head">
+            <span class="card-name">dpp lint</span>
+            <span class="card-what">Validate workflow YAML with line-accurate errors.</span>
+            <span class="tag local">local</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Catches unknown events, jobs with no <code class="inline plain">runs-on</code>, steps with both
+              <code class="inline plain">uses</code> and <code class="inline plain">run</code>,
+              <code class="inline plain">needs</code> pointing at jobs that do not exist, and unknown keys
+              &mdash; before a push burns CI minutes.
+            </p>
+          </div>
+        </article>
+
+        <article class="card" data-search="explain describe understand when runs triggers plain english">
+          <div class="card-head">
+            <span class="card-name">dpp explain <span class="sub">[workflow]</span></span>
+            <span class="card-what">Describe in plain English when and how a workflow runs.</span>
+            <span class="tag local">local</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Renders the trigger conditions, the job graph, approval-gated environments, token permissions,
+              and the exact DeployPilot command that would trigger each path.
+            </p>
+          </div>
+        </article>
+
+        <article class="card" data-search="list ls workflows discovered triggers overview">
+          <div class="card-head">
+            <span class="card-name">dpp list <span class="sub">(alias: ls)</span></span>
+            <span class="card-what">List discovered workflows and how they can be triggered.</span>
+            <span class="tag local">local</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Shows every workflow with its trigger events and the strategies DeployPilot can use for it.
+              Workflows nothing can trigger are marked as such.
+            </p>
+          </div>
+        </article>
+
+        <article class="card" data-search="new scaffold template create workflow starter boilerplate">
+          <div class="card-head">
+            <span class="card-name">dpp new</span>
+            <span class="card-what">Scaffold a workflow from a template.</span>
+            <span class="tag writes">writes</span>
+          </div>
+          <div class="card-body">
+            <dl class="flags">
+              <div class="flag" data-search="template id which"><dt>-t, --template &lt;id&gt;</dt><dd>Template id. See <a href="#templates">Templates</a>.</dd></div>
+              <div class="flag" data-search="output filename name"><dt>-o, --output &lt;filename&gt;</dt><dd>File name to write into <code class="inline plain">.github/workflows/</code>.</dd></div>
+              <div class="flag" data-search="dry run print preview"><dt>--dry-run</dt><dd>Print the file instead of writing it.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="secrets variables missing configured referenced check env">
+          <div class="card-head">
+            <span class="card-name">dpp secrets</span>
+            <span class="card-what">Compare secrets referenced in workflows against configured ones.</span>
+            <span class="tag api">api</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Catches the classic 2am failure: a workflow that references a secret nobody ever added. Also
+              lists configured secrets nothing uses. Names only &mdash; values are never fetched or printed.
+              Exits non-zero when anything referenced is missing.
+            </p>
+          </div>
+        </article>
+
+        <article class="card" data-search="init config setup environments profiles generate wizard">
+          <div class="card-head">
+            <span class="card-name">dpp init</span>
+            <span class="card-what">Create a config from your existing workflows.</span>
+            <span class="tag writes">writes</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Reads your real workflows and asks which should become environments, rather than dumping a
+              generic template you have to correct. Interactive only.
+            </p>
+            <dl class="flags">
+              <div class="flag" data-search="format ts json typescript"><dt>--format &lt;format&gt;</dt><dd>Config format. <span class="choices">ts · json</span></dd></div>
+              <div class="flag" data-search="dry run print preview"><dt>--dry-run</dt><dd>Print the config instead of writing it.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="card" data-search="completion shell bash zsh fish tab autocomplete">
+          <div class="card-head">
+            <span class="card-name">dpp completion <span class="sub">&lt;shell&gt;</span></span>
+            <span class="card-what">Print a shell completion script.</span>
+            <span class="tag local">local</span>
+          </div>
+          <div class="card-body">
+            <p style="margin:0;color:var(--dim);font-size:14px;">
+              Completes command names, workflow files, strategies and bump types.
+              Accepts <code class="inline plain">bash</code>, <code class="inline plain">zsh</code>,
+              or <code class="inline plain">fish</code>.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============================================================= GLOBAL -->
+    <section id="global">
+      <div class="sec-head">
+        <h2>Global flags</h2>
+        <p class="sec-note">Accepted before or after any command.</p>
+      </div>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead><tr><th scope="col">Flag</th><th scope="col">Effect</th></tr></thead>
+            <tbody>
+              <tr data-search="version v number"><td class="mono">-v, --version</td><td>Print the installed version.</td></tr>
+              <tr data-search="cwd directory path run elsewhere"><td class="mono">-C, --cwd &lt;path&gt;</td><td>Run as if started in <code class="inline plain">&lt;path&gt;</code>.</td></tr>
+              <tr data-search="config file path custom"><td class="mono">--config &lt;path&gt;</td><td>Path to a DeployPilot config file.</td></tr>
+              <tr data-search="json machine readable output parse script"><td class="mono">--json</td><td>Machine-readable output. Also disables prompts.</td></tr>
+              <tr data-search="verbose debug output api calls"><td class="mono">--verbose</td><td>Print debug output, including every API call.</td></tr>
+              <tr data-search="quiet silent suppress"><td class="mono">-q, --quiet</td><td>Suppress non-error output.</td></tr>
+              <tr data-search="remote origin git name"><td class="mono">--remote &lt;name&gt;</td><td>Git remote to use. Defaults to <code class="inline plain">origin</code>.</td></tr>
+              <tr data-search="help usage"><td class="mono">-h, --help</td><td>Help for the program or for one command.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ STAGING -->
+    <section id="staging">
+      <div class="sec-head">
+        <h2>Staging modes</h2>
+        <p class="sec-note">
+          What goes into the deployment. Offered as a prompt when you run <code class="inline plain">dpp deploy</code>
+          with a dirty working tree, and available as flags for scripts.
+        </p>
+      </div>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead><tr><th scope="col">Mode</th><th scope="col">Flag</th><th scope="col">What happens</th></tr></thead>
+            <tbody>
+              <tr data-search="all everything commit whole tree">
+                <td class="goal">Commit all changes</td>
+                <td class="mono">-a, --all</td>
+                <td>Everything in the working tree, including untracked files.</td>
+              </tr>
+              <tr data-search="pick specific files selective subset choose checklist partial">
+                <td class="goal">Pick specific files</td>
+                <td class="mono">-f, --file &lt;path...&gt;</td>
+                <td>A checklist, or explicit paths and globs. Unselected files stay uncommitted. Files that were staged but <em>not</em> selected are unstaged first, so they cannot be swept into a production deploy.</td>
+              </tr>
+              <tr data-search="staged index existing git add">
+                <td class="goal">Use the existing index</td>
+                <td class="mono">--staged</td>
+                <td>Exactly what <code class="inline plain">git add</code> already put in the index.</td>
+              </tr>
+              <tr data-search="none existing commits already pushed nothing new tag only">
+                <td class="goal">Deploy existing commits</td>
+                <td class="mono">--no-commit</td>
+                <td>Commits nothing. Tags or dispatches work that is already committed &mdash; and possibly already pushed. Combine with <code class="inline plain">--ref</code> to target an older commit.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px;" data-search="safety credentials env pem secrets warning protection">
+        <strong>Credential guard.</strong> Selected paths are matched against
+        <code class="inline plain">.env*</code>, <code class="inline plain">*.pem</code>,
+        <code class="inline plain">*.key</code>, <code class="inline plain">id_rsa</code>,
+        <code class="inline plain">credentials.json</code> and similar. A match stops the deployment and asks.
+        Non-interactively it exits <code class="inline plain">130</code> unless you pass
+        <code class="inline plain">--yes</code>.
+      </div>
+      <div class="callout" style="margin-top:10px;background:var(--surface);border-color:var(--line);color:var(--dim);" data-search="non interactive ci default dirty tree">
+        <strong style="color:var(--ink);">In CI, nothing is guessed.</strong> A non-interactive run with a dirty
+        working tree and no staging flag deploys <em>existing commits only</em>. It never assumes you meant to commit.
+      </div>
+    </section>
+
+    <!-- =============================================================== TAGS -->
+    <section id="tags">
+      <div class="sec-head">
+        <h2>Tag patterns</h2>
+        <p class="sec-note">
+          Tag names are generated from the workflow's own <code class="inline plain">tags:</code> filter and
+          validated against it. A candidate the filter would ignore is never offered &mdash; pushing it would
+          trigger nothing.
+        </p>
+      </div>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead><tr><th scope="col">Workflow pattern</th><th scope="col">Detected as</th><th scope="col">What you are offered</th></tr></thead>
+            <tbody>
+              <tr data-search="semver v pattern major minor patch"><td class="mono">v*.*.*</td><td>semver</td><td class="mono">v1.2.4 · v1.3.0 · v2.0.0 · v1.2.4-rc.0</td></tr>
+              <tr data-search="prod prefix semver history"><td class="mono">prod-v*</td><td>semver, from tag history</td><td class="mono">prod-v1.2.4</td></tr>
+              <tr data-search="prod prefix timestamp no history"><td class="mono">prod-v*</td><td>timestamp, no semver history</td><td class="mono">prod-v20260908-141530</td></tr>
+              <tr data-search="release slash calver"><td class="mono">release/*</td><td>timestamp or calver</td><td class="mono">release/2026.09.1</td></tr>
+              <tr data-search="suffix rc prerelease"><td class="mono">v*-rc</td><td>prefix and suffix preserved</td><td class="mono">v1.2.4-rc</td></tr>
+              <tr data-search="literal fixed exact no wildcard"><td class="mono">release</td><td>literal</td><td class="mono">release</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px;" data-search="conventional commits inference bump automatic changelog">
+        <strong>Bump inference.</strong> With Conventional Commits, the bump is read from the commits since the
+        last tag &mdash; <code class="inline plain">BREAKING CHANGE</code> or <code class="inline plain">!</code>
+        gives major, <code class="inline plain">feat</code> gives minor, everything else gives patch &mdash; and
+        is marked <em>(recommended)</em> in the picker. The annotated tag carries a grouped changelog with
+        contributors.
+      </div>
+    </section>
+
+    <!-- ============================================================== RULES -->
+    <section id="rules">
+      <div class="sec-head">
+        <h2>Doctor rules</h2>
+        <p class="sec-note">
+          Pass an id to <code class="inline plain">--only</code> or <code class="inline plain">--skip</code>.
+          Rules marked <span class="sev note">token</span> only run when a GitHub token is available.
+        </p>
+      </div>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead><tr><th scope="col">Rule id</th><th scope="col">Level</th><th scope="col">What it catches</th></tr></thead>
+            <tbody>
+              <tr data-search="unreachable workflow no triggers never runs on">
+                <td class="mono">unreachable-workflow</td><td><span class="sev error">error</span></td>
+                <td>A workflow with no <code class="inline plain">on:</code> block, so nothing can ever start it.</td>
+              </tr>
+              <tr data-search="untrusted checkout pull_request_target fork secrets security">
+                <td class="mono">untrusted-checkout</td><td><span class="sev error">error</span></td>
+                <td><code class="inline plain">pull_request_target</code> combined with a checkout of the PR head &mdash; any fork can then run its own code with access to your secrets.</td>
+              </tr>
+              <tr data-search="hardcoded secret credential token aws key committed">
+                <td class="mono">hardcoded-secret</td><td><span class="sev error">error</span></td>
+                <td>A GitHub token, AWS access key, private key, or API key written straight into the workflow.</td>
+              </tr>
+              <tr data-search="deprecated command set-output save-state removed noop">
+                <td class="mono">deprecated-command</td><td><span class="sev error">error</span></td>
+                <td><code class="inline plain">::set-output</code>, <code class="inline plain">::save-state</code>, <code class="inline plain">::set-env</code>, <code class="inline plain">::add-path</code> &mdash; removed by GitHub and now silent no-ops.</td>
+              </tr>
+              <tr data-search="missing secret not configured referenced token">
+                <td class="mono">missing-secret</td><td><span class="sev error">error</span> <span class="sev note">token</span></td>
+                <td>A secret the workflow references that the repository does not define.</td>
+              </tr>
+              <tr data-search="unpinned action mutable tag sha supply chain">
+                <td class="mono">unpinned-action</td><td><span class="sev warn">warning</span></td>
+                <td>An action pinned to a mutable ref like <code class="inline plain">@v4</code>. Whoever controls it can change what runs in your pipeline.</td>
+              </tr>
+              <tr data-search="deprecated action checkout v2 v3 old version node">
+                <td class="mono">deprecated-action</td><td><span class="sev warn">warning</span></td>
+                <td>Action versions GitHub has deprecated or stopped supporting.</td>
+              </tr>
+              <tr data-search="permissions missing github token write broad least privilege">
+                <td class="mono">missing-permissions</td><td><span class="sev warn">warning</span></td>
+                <td>No <code class="inline plain">permissions:</code> block, so <code class="inline plain">GITHUB_TOKEN</code> can fall back to repository-wide write access.</td>
+              </tr>
+              <tr data-search="concurrency race deploy simultaneous group">
+                <td class="mono">missing-concurrency</td><td><span class="sev warn">warning</span></td>
+                <td>A deployment workflow with no <code class="inline plain">concurrency:</code> group. Two deploys started close together will race.</td>
+              </tr>
+              <tr data-search="stale runner retired ubuntu 18.04 20.04 macos image">
+                <td class="mono">stale-runner</td><td><span class="sev warn">warning</span></td>
+                <td>A <code class="inline plain">runs-on</code> image GitHub has retired.</td>
+              </tr>
+              <tr data-search="timeout minutes long running cost minutes 360">
+                <td class="mono">missing-timeout</td><td><span class="sev note">note</span></td>
+                <td>A job with no <code class="inline plain">timeout-minutes</code>. GitHub's default is 360 minutes of billable runner time.</td>
+              </tr>
+              <tr data-search="manual trigger workflow_dispatch escape hatch rerun">
+                <td class="mono">no-manual-trigger</td><td><span class="sev note">note</span></td>
+                <td>A deployment workflow with no <code class="inline plain">workflow_dispatch:</code>, so it cannot be re-run without a new commit or tag.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== TEMPLATES -->
+    <section id="templates">
+      <div class="sec-head">
+        <h2>Templates</h2>
+        <p class="sec-note">
+          Used by <code class="inline plain">dpp new -t &lt;id&gt;</code>. All ship with
+          <code class="inline plain">permissions</code>, <code class="inline plain">concurrency</code>
+          and job timeouts already set, so <code class="inline plain">doctor</code> stays quiet.
+        </p>
+      </div>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead><tr><th scope="col">Id</th><th scope="col">Writes</th><th scope="col">What it is</th></tr></thead>
+            <tbody>
+              <tr data-search="deploy production tag environment gate"><td class="mono">deploy</td><td class="mono">deploy-prod.yml</td><td>Tag-triggered production deploy with an environment gate and a manual dispatch fallback.</td></tr>
+              <tr data-search="bun publish npm package provenance version tag"><td class="mono">bun-publish</td><td class="mono">publish.yml</td><td>Publish to npm on a <code class="inline plain">v*.*.*</code> tag, with Bun and provenance.</td></tr>
+              <tr data-search="node ci test matrix pull request"><td class="mono">node-ci</td><td class="mono">ci.yml</td><td>Node CI on push and pull request, with a version matrix.</td></tr>
+              <tr data-search="docker ghcr image build push buildx cache"><td class="mono">docker</td><td class="mono">docker.yml</td><td>Build and push a Docker image to GHCR with buildx and layer caching.</td></tr>
+              <tr data-search="pages static site github deploy"><td class="mono">pages</td><td class="mono">pages.yml</td><td>Deploy a static site to GitHub Pages, split into build and deploy jobs.</td></tr>
+              <tr data-search="release published artifacts assets"><td class="mono">release</td><td class="mono">release.yml</td><td>Run when a GitHub Release is published.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= CONFIG -->
+    <section id="config">
+      <div class="sec-head">
+        <h2>Config</h2>
+        <p class="sec-note">
+          Optional &mdash; without it, everything is prompted. Generate one with
+          <code class="inline plain">dpp init</code>. Loaded from
+          <code class="inline plain">deploypilot.config.{ts,mts,js,mjs,json}</code>,
+          <code class="inline plain">.deploypilotrc[.json]</code>, or a
+          <code class="inline plain">deploypilot</code> key in <code class="inline plain">package.json</code>.
+        </p>
+      </div>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead><tr><th scope="col">Key</th><th scope="col">Scope</th><th scope="col">Effect</th></tr></thead>
+            <tbody>
+              <tr data-search="default environment"><td class="mono">defaultEnvironment</td><td>root</td><td>Environment used when none is named.</td></tr>
+              <tr data-search="remote origin git"><td class="mono">remote</td><td>root</td><td>Git remote. Defaults to <code class="inline plain">origin</code>.</td></tr>
+              <tr data-search="protected paths credentials env guard"><td class="mono">protectedPaths</td><td>root</td><td>Glob patterns that trigger the credential guard.</td></tr>
+              <tr data-search="commit convention conventional signoff template"><td class="mono">commit</td><td>root</td><td><code class="inline plain">convention</code> (<code class="inline plain">free</code> or <code class="inline plain">conventional</code>), <code class="inline plain">signoff</code>, <code class="inline plain">template</code>.</td></tr>
+              <tr data-search="hooks on success failure notify alert"><td class="mono">hooks</td><td>root</td><td><code class="inline plain">onSuccess</code> and <code class="inline plain">onFailure</code> shell commands.</td></tr>
+              <tr data-search="workflow file environment"><td class="mono">workflow</td><td>environment</td><td>Workflow filename this environment deploys.</td></tr>
+              <tr data-search="strategy tag branch dispatch release"><td class="mono">strategy</td><td>environment</td><td>Force a strategy instead of inferring one.</td></tr>
+              <tr data-search="require branch main protection"><td class="mono">requireBranch</td><td>environment</td><td>Branch that must be checked out. Preflight fails otherwise.</td></tr>
+              <tr data-search="require clean working tree dirty"><td class="mono">requireClean</td><td>environment</td><td>Refuse to deploy with a dirty working tree.</td></tr>
+              <tr data-search="tag pattern override filter"><td class="mono">tagPattern</td><td>environment</td><td>Override the workflow's own tag filter.</td></tr>
+              <tr data-search="versioning semver calver timestamp prompt"><td class="mono">versioning</td><td>environment</td><td><code class="inline plain">semver</code> · <code class="inline plain">calver</code> · <code class="inline plain">timestamp</code> · <code class="inline plain">prompt</code>.</td></tr>
+              <tr data-search="pre deploy gate tests build lint commands"><td class="mono">preDeploy</td><td>environment</td><td>Commands run locally before anything is pushed. A non-zero exit aborts.</td></tr>
+              <tr data-search="post deploy after commands"><td class="mono">postDeploy</td><td>environment</td><td>Commands run after a successful deployment.</td></tr>
+              <tr data-search="confirm with type name friction production"><td class="mono">confirmWith</td><td>environment</td><td><code class="inline plain">none</code> · <code class="inline plain">confirm</code> · <code class="inline plain">type-name</code> (retype the environment name).</td></tr>
+              <tr data-search="inputs dispatch defaults"><td class="mono">inputs</td><td>environment</td><td>Default <code class="inline plain">workflow_dispatch</code> inputs.</td></tr>
+              <tr data-search="watch follow run default"><td class="mono">watch</td><td>environment</td><td>Follow the run to completion by default.</td></tr>
+              <tr data-search="create release github publish"><td class="mono">createRelease</td><td>environment</td><td>Publish a GitHub Release alongside the tag.</td></tr>
+              <tr data-search="sign tags gpg"><td class="mono">signTags</td><td>environment</td><td>Sign tags with GPG.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px;" data-search="typescript config bun node mjs json runtime">
+        <strong>TypeScript configs need Bun.</strong> Under Node.js, use
+        <code class="inline plain">deploypilot.config.mjs</code>,
+        <code class="inline plain">deploypilot.config.json</code>, or the
+        <code class="inline plain">package.json</code> key. Everything else works on both runtimes.
+      </div>
+    </section>
+
+    <!-- =============================================================== AUTH -->
+    <section id="auth">
+      <div class="sec-head">
+        <h2>Authentication &amp; exit codes</h2>
+        <p class="sec-note">
+          Tag and branch deployments work with plain Git and no token. Everything marked
+          <span class="tag api">api</span> above needs one.
+        </p>
+      </div>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead><tr><th scope="col">Order</th><th scope="col">Source</th><th scope="col">Notes</th></tr></thead>
+            <tbody>
+              <tr data-search="deploypilot token env var priority"><td class="num mono">1</td><td class="mono">DEPLOYPILOT_TOKEN</td><td>Highest priority. Use to override everything else.</td></tr>
+              <tr data-search="gh token env var"><td class="num mono">2</td><td class="mono">GH_TOKEN</td><td>The GitHub CLI's own variable.</td></tr>
+              <tr data-search="github token env var actions"><td class="num mono">3</td><td class="mono">GITHUB_TOKEN</td><td>Set automatically inside GitHub Actions.</td></tr>
+              <tr data-search="gh cli auth login zero setup keychain"><td class="num mono">4</td><td class="mono">gh auth token</td><td>If you already use the GitHub CLI, there is nothing to set up.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="sec-note" style="margin:14px 0 10px;">
+        The token needs the <code class="inline plain">repo</code> and <code class="inline plain">workflow</code>
+        scopes. GitHub Enterprise Server is detected from the remote URL.
+      </p>
+      <div class="tablewrap">
+        <div class="tablescroll">
+          <table>
+            <thead><tr><th scope="col">Exit code</th><th scope="col">Meaning</th></tr></thead>
+            <tbody>
+              <tr data-search="exit zero success ok"><td class="num mono">0</td><td>Success. For <code class="inline plain">--watch</code>, the run also succeeded.</td></tr>
+              <tr data-search="exit one failure error"><td class="num mono">1</td><td>Failure &mdash; preflight, a failed run, a lint error, or a missing secret.</td></tr>
+              <tr data-search="exit 130 cancelled sigint ctrl c interrupted"><td class="num mono">130</td><td>Cancelled by the user, or refused at a safety prompt.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <div class="empty" id="empty">
+      <p style="margin:0 0 6px;">Nothing matches <code id="empty-q"></code>.</p>
+      <p style="margin:0;font-size:13.5px;">Try a goal instead of a flag &mdash; <code>rollback</code>, <code>selective</code>, <code>secret</code>, <code>tag</code>.</p>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>DeployPilot v0.2.0 &middot; <a href="https://www.npmjs.com/package/deploypilot">npm</a> &middot; <a href="https://github.com/himanshu-soni57/deploymate">GitHub</a></span>
+    <span>Press <kbd class="key">/</kbd> to filter &middot; <kbd class="key">Esc</kbd> to clear</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    "use strict";
+
+    var input = document.getElementById("filter");
+    var count = document.getElementById("count");
+    var empty = document.getElementById("empty");
+    var emptyQ = document.getElementById("empty-q");
+    var sections = Array.prototype.slice.call(document.querySelectorAll("main section"));
+
+    /* Every filterable unit: recipe rows, reference rows, command cards,
+       individual flags, and callouts. */
+    var units = Array.prototype.slice.call(document.querySelectorAll("[data-search]"));
+
+    units.forEach(function (el) {
+      el.dataset.haystack = (el.dataset.search + " " + el.textContent)
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+    });
+
+    var total = units.filter(function (el) {
+      return !el.classList.contains("flag");
+    }).length;
+
+    function label(n) {
+      return n + (n === 1 ? " entry" : " entries");
+    }
+
+    count.textContent = label(total);
+
+    function apply(query) {
+      var q = query.trim().toLowerCase();
+      var shown = 0;
+
+      units.forEach(function (el) {
+        var hit = !q || el.dataset.haystack.indexOf(q) !== -1;
+        el.classList.toggle("hidden", !hit);
+        if (hit && !el.classList.contains("flag")) shown++;
+      });
+
+      /* A command card matching by name keeps all of its flags; otherwise show
+         only the flags that matched, so the card stays useful when filtered. */
+      document.querySelectorAll(".card").forEach(function (card) {
+        if (card.classList.contains("hidden")) return;
+        var flags = card.querySelectorAll(".flag");
+        var visible = card.querySelectorAll(".flag:not(.hidden)").length;
+        var nameHit = !q || card.dataset.haystack.indexOf(q) !== -1;
+        if (nameHit && visible === 0) {
+          flags.forEach(function (f) { f.classList.remove("hidden"); });
+        }
+      });
+
+      /* Hide a section once nothing inside it survives. */
+      sections.forEach(function (section) {
+        var live = section.querySelectorAll("[data-search]:not(.hidden)").length;
+        section.classList.toggle("hidden", q !== "" && live === 0);
+      });
+
+      count.textContent = q ? label(shown) + " of " + total : label(total);
+      emptyQ.textContent = query.trim();
+      empty.classList.toggle("on", q !== "" && shown === 0);
+    }
+
+    input.addEventListener("input", function () { apply(input.value); });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "/" && document.activeElement !== input) {
+        event.preventDefault();
+        input.focus();
+        input.select();
+      } else if (event.key === "Escape" && document.activeElement === input) {
+        input.value = "";
+        apply("");
+        input.blur();
+      }
+    });
+
+    /* Click-to-copy on every command string. Clipboard access can be blocked in
+       an embedded frame, so fall back to a selection-based copy. */
+    function copy(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function (resolve, reject) {
+        var area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+        try {
+          document.execCommand("copy") ? resolve() : reject();
+        } catch (error) {
+          reject(error);
+        }
+        document.body.removeChild(area);
+      });
+    }
+
+    document.querySelectorAll("button.cmd").forEach(function (button) {
+      button.addEventListener("click", function () {
+        copy(button.textContent.trim()).then(function () {
+          button.classList.add("copied");
+          setTimeout(function () { button.classList.remove("copied"); }, 1400);
+        }, function () { /* Nothing to do; the text is still selectable. */ });
+      });
+    });
+
+    /* Rail highlight follows the section currently in view. */
+    var links = Array.prototype.slice.call(document.querySelectorAll(".rail a"));
+    var byId = {};
+    links.forEach(function (link) { byId[link.getAttribute("href").slice(1)] = link; });
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          links.forEach(function (link) { link.classList.remove("on"); });
+          var link = byId[entry.target.id];
+          if (link) link.classList.add("on");
+        });
+      }, { rootMargin: "-84px 0px -70% 0px" });
+
+      sections.forEach(function (section) { observer.observe(section); });
+    }
+  })();
+</script>
+
+</body>
+</html>
