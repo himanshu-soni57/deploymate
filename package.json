@@ -1,6 +1,6 @@
 {
   "name": "deploypilot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Trigger, monitor, and audit GitHub Actions deployments from your terminal.",
   "author": "Himanshu Soni",
   "license": "MIT",

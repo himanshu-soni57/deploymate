@@ -112,7 +112,10 @@ Preflight
   dangling tags blocking the next attempt.
 - **Trigger verification** — DeployPilot refuses to create a tag that the workflow's own
   filter would ignore, and warns when a push cannot match a `paths:` filter.
-- **`confirmWith: "type-name"`** makes you retype the environment name before prod.
+- **Confirmation levels** — the default `confirm` prompt is preselected to **Yes**, so Enter
+  ships. For anything you cannot take back, set **`confirmWith: "type-name"`** and the
+  environment name has to be typed out. Destructive prompts elsewhere (the credential
+  guard, file overwrites, cancelling a run) still default to No.
 
 ---
 
@@ -332,6 +335,9 @@ bun run build
 ---
 
 ## Roadmap
+
+Shipped in 0.3.0: the deployment confirmation is preselected to Yes, so Enter ships.
+Use `confirmWith: "type-name"` for environments where that is too easy.
 
 Shipped in 0.2.0: preflight and rollback, selective staging, deploy-existing-commits,
 real `workflow_dispatch`, run monitoring, semver and changelogs, config profiles,
